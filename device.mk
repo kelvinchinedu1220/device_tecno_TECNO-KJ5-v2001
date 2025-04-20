@@ -50,6 +50,11 @@ PRODUCT_PACKAGES += \
     mtk_plpath_utils \
     mtk_plpath_utils.recovery
 
+# Fastbootd
+PRODUCT_PACKAGES += \
+    android.hardware.fastboot@1.0-impl-mock \
+    fastbootd
+
 # Keymaster
 PRODUCT_PACKAGES += \
     android.hardware.keymaster@4.1
