@@ -31,6 +31,9 @@ TARGET_BOOTLOADER_BOARD_NAME := KJ5
 TARGET_NO_BOOTLOADER := true
 TARGET_USES_UEFI := true
 
+# Allow building with minimal manifest
+ALLOW_MISSING_DEPENDENCIES := true
+
 # Build Hacks
 BUILD_BROKEN_DUP_RULES := true
 BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
@@ -203,8 +206,25 @@ TW_CUSTOM_CPU_POS := "300"
 TW_CUSTOM_CLOCK_POS := "70"
 TW_CUSTOM_BATTERY_POS := "790"
 
-# Hack depends
-ALLOW_MISSING_DEPENDENCIES := true
+BOARD_USES_MTK_HARDWARE := true
+
+# Additional binaries & libraries needed for recovery
+TARGET_RECOVERY_DEVICE_MODULES += \
+    libkeymaster4 \
+    libkeymaster41 \
+    libpuresoftkeymasterdevice
+
+# Decryption
+TW_INCLUDE_CRYPTO := true
+TW_INCLUDE_CRYPTO_FBE := true
+TW_INCLUDE_FBE_METADATA_DECRYPT := true
+TW_PREPARE_DATA_MEDIA_EARLY := true
+TW_INCLUDE_FBE_METADATA_DECRYPT := true
+TW_FORCE_KEYMASTER_VER := true
+TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += \
+    $(TARGET_OUT_SHARED_LIBRARIES)/libkeymaster4.so \
+     $(TARGET_OUT_SHARED_LIBRARIES)/libkeymaster41.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/libpuresoftkeymasterdevice.so
 
 # Device 
-TW_DEVICE_VERSION := SPARK 20 by r3nzph
+TW_DEVICE_VERSION := SPARK 20 KJ5
